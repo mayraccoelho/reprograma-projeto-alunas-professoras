@@ -140,15 +140,14 @@ exports.delete = (req, res) => {
 
   Alunas.findById(idAluna, function (err, aluna) {
     if (err) return res.status(500).send(err);
-    res.status(204).send({ message: "Atualizado com sucesso" });
 
-    if(!aluna){
-      return res.status(200).send({message: 'Infelizmente não localizamos a aluna'})
+    if (!aluna) {
+      return res.status(200).send({ message: 'Infelizmente não localizamos a aluna' })
     }
 
-    aluna.remove(function(err){
-      if(!err) {
-        res.status(200).send({message: 'Aluna removida com sucesso'})
+    aluna.remove(function (err) {
+      if (!err) {
+        res.status(200).send({ message: 'Aluna removida com sucesso' })
       }
     })
   })
