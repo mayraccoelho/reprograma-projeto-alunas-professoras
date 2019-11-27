@@ -1,7 +1,7 @@
 const Alunas = require('../model/alunas');
 
 //GET
-exports.get = (req, res) => {
+exports.getAlunas = (req, res) => {
   Alunas.find(function (err, alunas) {
     if (err) res.status(500).send(err);
     res.status(200).send(alunas);
@@ -15,14 +15,14 @@ exports.getById = (req, res) => {
     if (err) return res.status(500).send(err);
 
     if (!aluna) {
-      return res.status(200).send({ message: `Infelizmente não localizamos a aluna de id: ${alunaId}` });
+      return res.status(200).send({ mensagem: `Infelizmente não localizamos a aluna de id: ${alunaId}` });
     }
 
     res.status(200).send(aluna);
   })
 }
 
-exports.getBooks = (req, res) => {
+exports.getLivros = (req, res) => {
   const id = req.params.id
 
   Alunas.findById(id, function (err, aluna) {
@@ -30,7 +30,7 @@ exports.getBooks = (req, res) => {
     if (err) return res.status(500).send(err)
 
     if (!aluna) {
-      return res.status(200).send({ message: `Infelizmente não localizamos a aluna de id: ${req.params.id}` })
+      return res.status(200).send({ mensagem: `Infelizmente não localizamos a aluna de id: ${req.params.id}` })
     }
     const livrosAluna = aluna.livros
     const livrosLidos = livrosAluna.filter(livro => livro.leu == true)
@@ -60,7 +60,7 @@ exports.getAge = (req, res) => {
     if (err) return res.status(500).send(err)
 
     if (!aluna) {
-      return res.status(200).send({ message: `Infelizmente não localizamos a aluna de id: ${req.params.id}` });
+      return res.status(200).send({ mensagem: `Infelizmente não localizamos a aluna de id: ${req.params.id}` });
     }
 
     const dataNasc = aluna.dateOfBirth
@@ -96,26 +96,26 @@ exports.post = (req, res) => {
   aluna.save(function (err) {
     if (err) res.status(500).send(err);
 
-    res.status(201).send(aluna);
+    res.status(201).send({ mensagem: 'Aluna incluída com sucesso' });
 
   })
 }
 
-exports.postBooks = (req, res) => {
+exports.postLivros = (req, res) => {
   const alunaId = req.params.id
 
   Alunas.findById(alunaId, function (err, aluna) {
     if (err) return res.status(500).send(err.message);
 
     if (!aluna) {
-      return res.status(200).send({ message: `Infelizmente não localizamos a aluna de id: ${alunaId}` });
+      return res.status(200).send({ mensagem: `Infelizmente não localizamos a aluna de id: ${alunaId}` });
     }
     const livro = req.body;
     (aluna.livros).push(livro);
 
     aluna.save(function (err) {
       if (err) res.status(500).send(err);
-      res.status(201).send(aluna);
+      res.status(201).send({ mensagem: 'Livro incluído com sucesso' });
     })
 
   });
@@ -130,7 +130,7 @@ exports.update = (req, res) => {
     { upsert: true },
     function (err) {
       if (err) return res.status(500).send({ message: err });
-      res.status(204).send({ message: "Atualizado com sucesso" });
+      res.status(200).send({ mensagem: "Atualizado com sucesso" });
     })
 }
 
@@ -142,12 +142,12 @@ exports.delete = (req, res) => {
     if (err) return res.status(500).send(err);
 
     if (!aluna) {
-      return res.status(200).send({ message: 'Infelizmente não localizamos a aluna' })
+      return res.status(200).send({ mensagem: 'Infelizmente não localizamos a aluna' })
     }
 
     aluna.remove(function (err) {
       if (!err) {
-        res.status(200).send({ message: 'Aluna removida com sucesso' })
+        res.status(200).send({ mensagem: 'Aluna removida com sucesso' })
       }
     })
   })
