@@ -46,7 +46,7 @@
 <tr>
 <td>GET</td>
 <td>Listar alunas por ID mostrando livros</td>
-<td>'/alunas/:id/books'</td>
+<td>'/alunas/:id/livros'</td>
 </tr>
 
 <tr>
