@@ -7,12 +7,12 @@ const mongoose = require('mongoose');
 
 const AlunasSchema = new mongoose.Schema({
     nome: { type: String },
-    dateOfBirth: { type: String },
-    nasceuEmSp: { type: String },
+    dataNascimento: { type: Date },
+    nasceuEmSp: { type: Boolean },
     livros: [{
         _id: false,
         titulo: String,
-        leu: String,
+        leu: Boolean,
     }]
 }, {
     versionKey: false

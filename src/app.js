@@ -8,7 +8,7 @@ const app = express()
 //mongo local "mongodb://localhost:27017/alunas"
 //mongo nuvem marilia "mongodb://admin:reprograma1@ds225902.mlab.com:25902/reprogramameli"
 
-mongoose.connect("mongodb://localhost:27017/alunas", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://admin:admin1304@cluster0-heovg.mongodb.net/alunas", { useNewUrlParser: true });
 
 //representação da conexão com o banco de dados 
 let db = mongoose.connection;
@@ -22,7 +22,6 @@ db.once("open", function () {
 })
 
 //rotas
-const index = require("./routes/index")
 const alunas = require("./routes/alunasRoute")
 const professoras = require("./routes/professorasRoute")
 
@@ -37,7 +36,6 @@ app.use(function (req, res, next) {
 
 app.use(bodyParser.json());
 
-app.use("/", index)
 app.use("/alunas", alunas)
 app.use("/professoras", professoras)
 
