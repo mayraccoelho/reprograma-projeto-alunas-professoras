@@ -14,7 +14,6 @@
 - Nodemon<br>
 - Mongoose<br>
 - BodyParser<br>
-- Joi<br>
 
 
 ## Endpoints Criados
